@@ -413,6 +413,16 @@ img, video {
   color: #FFFFFF;
 }
 
+.hero-tagline {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 2px;
+  color: rgba(235, 243, 255, 0.9);
+  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+}
+
 .hero-pill-badge {
   font-family: var(--font-heading);
   font-size: 0.78rem;
