@@ -8,6 +8,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initScrollProgressBar();
     initNavbarDynamics();
+    initVideoAutoplayAssurance();
     initScrollReveals();
     initParallaxEngine();
     initInteractive3DTilt();
@@ -366,4 +367,29 @@ function initPostHero3DShowcase() {
     }
 
     startAutoRotate();
+}
+
+/**
+ * Autoplay Assurance for Hero Background Video
+ */
+function initVideoAutoplayAssurance() {
+    const vids = document.querySelectorAll('video');
+    vids.forEach(video => {
+        video.muted = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                const playOnTouch = () => {
+                    video.play();
+                    document.removeEventListener('click', playOnTouch);
+                    document.removeEventListener('touchstart', playOnTouch);
+                };
+                document.addEventListener('click', playOnTouch, { once: true });
+                document.addEventListener('touchstart', playOnTouch, { once: true });
+            });
+        }
+    });
 }
